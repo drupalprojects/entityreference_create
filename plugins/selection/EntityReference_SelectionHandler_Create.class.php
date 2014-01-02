@@ -48,10 +48,10 @@ class EntityReference_SelectionHandler_Create extends EntityReference_SelectionH
       // If there's exactly one bundle that can be referenced by this field, also call a bundle specific hook.
       if (count($bundles)) {
         $bundle = reset($bundles);
-        $hooks[] = 'autocomplete_entity_create_' . $entity_type . '_' . $bundle;
+        $hooks[] = 'entityreference_create_' . $entity_type . '_' . $bundle;
       }
 
-      $hooks[] = 'autocomplete_entity_create_' . $entity_type;
+      $hooks[] = 'entityreference_create_' . $entity_type;
 
       $entity = null;
 
@@ -67,15 +67,16 @@ class EntityReference_SelectionHandler_Create extends EntityReference_SelectionH
         }
       }
 
-      if (!$entity) {
+      if ($entity) {
+        // Get the ID of this new entity:
+        list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
+
+        // Return the new entity's id.
+        return $id;
+      }
+      else {
         form_error($element, t('There are no entities matching "%value" and a new one could not be created automatically.', array('%value' => $input)));
       }
-
-      // Get the ID of this new entity:
-      list($id, $vid, $bundle) = entity_extract_ids($entity_type, $entity);
-
-      // Return the new entity's id.
-      return $id;
     }
     elseif (count($entities) > 5) {
       // Error if there are more than 5 matching entities.

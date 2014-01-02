@@ -38,7 +38,7 @@ function hook_entityreference_create_ENTITY_TYPE($input, $field, $form_state, $f
     'type' => 'car',
     'name' => $input,
   ));
-  
+
   entity_save('vehicle', $entity);
   return $entity;
 }
