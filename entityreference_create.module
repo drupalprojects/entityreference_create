@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function entityreference_create_ctools_plugin_directory($owner, $plugin) {
+
+  // We only have one plugin type to register at the moment.
+  if ($owner == 'entityreference' && $plugin == 'selection') {
+    return 'plugins/selection';
+  }
+}

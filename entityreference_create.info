@@ -1,1 +1,6 @@
-name = Entityreference Create
+name = "Entityreference Create"
+description = "Provides a selection handler for Entity References autocomplete fields that allows the creation of new entities."
+package = "Fields"
+core = 7.x
+
+dependencies[] = entityreference
